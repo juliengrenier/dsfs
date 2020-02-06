@@ -1,0 +1,12 @@
+[
+    { "id": 0, "name": "Hero", "friends":[1,2], "interests":["hadoop", "big data", "hbase", "java", "spark","storm","cassandra"]},
+    { "id": 1, "name": "Dunn", "friends":[0,2,3], "interests":["nosql", "mongodb","cassandra","hbase","postgres"]},
+    { "id": 2, "name": "Sue", "friends":[0,1,3], "interests":["python","scikit-learn", "scipy", "numpy", "statsmodel", "pandas"]},
+    { "id": 3, "name": "Chi", "friends":[1, 2, 4], "interests":["R", "python", "statistics", "regression", "probability"]},
+    { "id": 4, "name": "Thor", "friends":[3,5], "interests": ["machine learning", "regression", "decision trees", "libsvm"]},
+    { "id": 5, "name": "Clive", "friends":[4,6,7], "interests":["python", "R", "java", "c++", "haskell", "programming languages"]},
+    { "id": 6, "name": "Hicks", "friends":[5,8], "interests":["statistics","probability","mathematics","theory"]},
+    { "id": 7, "name": "Devin", "friends":[5,8], "interests":["machine learning", "scikit-learn", "mahout", "neural networks"]},
+    { "id": 8, "name": "Kate", "friends":[6,7,9], "interests":["neural networks", "deep learning", "big data", "artificial intelligence"]},
+    { "id": 9, "name": "Klein", "friends":[8], "interests":["hadoop", "java", "mapreduce", "big data"]}
+]
