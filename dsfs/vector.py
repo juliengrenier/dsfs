@@ -45,13 +45,13 @@ def sum_of_squares(v: Vector) -> float:
 
 
 def magnitude(v: Vector) -> float:
-    math.sqrt(sum_of_squared(v))
+    math.sqrt(sum_of_squares(v))
 
 
 def squared_distance(v1: Vector, v2: Vector) -> float:
-    return sum_of_squared(substract(v1, v2))
+    return sum_of_squares(substract(v1, v2))
 
 
 def distance(v1: Vector, v2: Vector) -> float:
-    return magnitude(squared_distance(v1, v2))
+    return math.sqrt(squared_distance(v1, v2))
 
