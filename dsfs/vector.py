@@ -45,7 +45,7 @@ def sum_of_squares(v: Vector) -> float:
 
 
 def magnitude(v: Vector) -> float:
-    math.sqrt(sum_of_squares(v))
+    return math.sqrt(sum_of_squares(v))
 
 
 def squared_distance(v1: Vector, v2: Vector) -> float:
@@ -55,3 +55,12 @@ def squared_distance(v1: Vector, v2: Vector) -> float:
 def distance(v1: Vector, v2: Vector) -> float:
     return math.sqrt(squared_distance(v1, v2))
 
+
+def direction(v: Vector) -> Vector:
+    mag = magnitude(v)
+    return [v_i / mag for v_i in v]
+
+
+def project(v1: Vector, v2: Vector) -> Vector:
+    projection_length = dot_product(v1, v2)
+    return scalar_multiply(projection_length, v2)
