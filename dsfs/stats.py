@@ -26,7 +26,7 @@ def quantile(xs: List[float], p: float) -> float:
 def mode(xs: List[float]) -> List[float]:
     counts = Counter(xs)
     max_count = max(counts.values())
-    return [x_i for x_i, count in counts.values()]
+    return [x_i for x_i, count in counts.items() if count == max_count]
 
 
 def data_range(xs: List[float]) -> float:
