@@ -25,5 +25,6 @@ def least_squares_fit(xs: Vector, ys: Vector) -> Tuple[float, float]:
 def total_sum_of_squares(xs: Vector) -> float:
     return sum(x ** 2 for x in de_mean(xs))
 
+
 def r_squared(alpla: float, beta: float, xs: Vector, ys: Vector) -> float:
     return 1 - (sum_of_sqerror(alpha, beta, xs, ys) / total_sum_of_squares(ys))
