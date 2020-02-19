@@ -2,7 +2,7 @@ from typing import Tuple, List
 import random
 import tqdm
 
-from dsfs.vector import Vector, dot_product
+from dsfs.vector import Vector, dot_product, add
 from dsfs.matrix import Matrix, vector_mean
 from dsfs.gradients import gradient_step
 from dsfs.lr import total_sum_of_squares
@@ -40,7 +40,8 @@ def least_squares_fit(
         ys: Vector,
         learning_rate: float = 0.001,
         num_steps: int = 1000,
-        batch_size:int = 1
+        batch_size:int = 1,
+        sqerror_gradient_fn = sqerror_gradient
 ):
     guess = [random.random() for _ in xs[0]]
     for _ in tqdm.trange(num_steps, desc="Least squares fit"):
@@ -48,7 +49,7 @@ def least_squares_fit(
             batch_xs = xs[start: start+batch_size]
             batch_ys = ys[start: start+batch_size]
             gradient = vector_mean(
-                [sqerror_gradient(x, y, guess) for x,y in zip(batch_xs, batch_ys)]
+                [sqerror_gradient_fn(x, y, guess) for x,y in zip(batch_xs, batch_ys)]
             )
             guess = gradient_step(guess, gradient, -learning_rate)
     return guess
@@ -69,3 +70,25 @@ def estimate_sample_beta(pairs: List[Tuple[Vector, float]]):
         batch_size=25
     )
     return beta
+
+
+def ridge_penalty(beta: Vector, alpha: float) -> float:
+    """The larger alpha is, the larger the penalty is"""
+    return alpha * dot_product(beta[1:], beta[1:])
+
+
+def squared_error_ridge(
+        xs: Vector,
+        y: float,
+        beta: Vector,
+        alpha: float) -> float:
+    return error(xs, y, beta) ** 2 + ridge_penalty(beta, alpha)
+
+
+def ridge_penalty_gradient(beta: Vector, alpha: float) -> Vector:
+    return [0.] + [2 * alpha * beta_j for beta_j in beta[1:]]
+
+
+def sqerror_ridge_gradient(xs: Vector, y: float, beta: Vector, alpha: float) -> Vector:
+    return add(sqerror_gradient(xs, y, beta), ridge_penalty_gradient(beta, alpha))
+
